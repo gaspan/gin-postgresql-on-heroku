@@ -1,7 +1,7 @@
 package employee
 
 import (
-	"gin-gonic-101/model"
+	"emp-api/model"
 	"net/http"
 	"strconv"
 

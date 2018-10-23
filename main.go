@@ -1,12 +1,17 @@
 package main
 
 import (
-	"gin-gonic-101/handler"
+	"emp-api/handler"
 
 	"github.com/gin-gonic/gin"
+	"github.com/jinzhu/gorm"
 )
 
 func main() {
+	// connecting postgres db
+	db, err := gorm.Open("mysql", "user:password@/dbname?charset=utf8&parseTime=True&loc=Local")
+	defer db.Close()
+
 	router := gin.Default()
 
 	api := router.Group("/api")
