@@ -8,11 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var employees = []model.Employee{
-	model.Employee{1, "Wasuwat", "Limsuparhat", 22},
-	model.Employee{2, "Suepsakun", "Aiamlaoo", 22},
-	model.Employee{3, "Sitthipon", "Songsaen", 23},
-}
+var employees = []model.Employee{}
 
 // List all employees
 func List(c *gin.Context) {
@@ -29,7 +25,7 @@ func Add(c *gin.Context) {
 		return
 	}
 
-	employee.ID = len(employees) + 1
+	employee.ID = uint(len(employees))
 	employees = append(employees, employee)
 
 	resp := model.Response{
@@ -53,7 +49,7 @@ func Update(c *gin.Context) {
 	}
 
 	for i, e := range employees {
-		if e.ID == id {
+		if e.ID == uint(id) {
 			employee.ID = e.ID
 			employees[i] = employee
 		}
@@ -73,7 +69,7 @@ func Delete(c *gin.Context) {
 	id, _ := strconv.Atoi(c.Param("id"))
 
 	for i, e := range employees {
-		if e.ID == id {
+		if e.ID == uint(id) {
 			employees = append(employees[:i], employees[i+1:]...)
 		}
 	}

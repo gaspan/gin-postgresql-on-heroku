@@ -1,10 +1,17 @@
 {
 	"comment": "",
 	"ignore": "test",
-	"package": [
-		{
+	"package": [{
+			"checksumSHA1": "nYJ4C35LkSdSeAnBscc7QlrTAlc=",
 			"path": "github.com/campoy/embedmd",
-			"revision": ""
+			"revision": "c59ce00e02967db5e93d897330142a3ef6145786",
+			"revisionTime": "2017-12-05T01:54:32Z"
+		},
+		{
+			"checksumSHA1": "tXy3gjonkjI7srNa6NsY9Hc+G8w=",
+			"path": "github.com/campoy/embedmd/embedmd",
+			"revision": "c59ce00e02967db5e93d897330142a3ef6145786",
+			"revisionTime": "2017-12-05T01:54:32Z"
 		},
 		{
 			"path": "github.com/client9/misspell",
@@ -29,8 +36,10 @@
 			"revisionTime": "2017-01-09T09:34:21Z"
 		},
 		{
+			"checksumSHA1": "EEJ9hH3lJfShSaPFn84i+0MKpjE=",
 			"path": "github.com/gin-gonic/autotls",
-			"revision": ""
+			"revision": "be87bd5ef97b7398e468c35ad266aabf099a095b",
+			"revisionTime": "2018-04-26T09:12:46Z"
 		},
 		{
 			"checksumSHA1": "ow9NW7BBNs7ToXqdUcf40f997+8=",
@@ -53,10 +62,6 @@
 			"revisionTime": "2018-10-23T02:56:33Z"
 		},
 		{
-			"path": "github.com/golang/protobuf/proto",
-			"revision": ""
-		},
-		{
 			"path": "github.com/jessevdk/go-assets",
 			"revision": ""
 		},
@@ -67,10 +72,22 @@
 			"revisionTime": "2018-10-07T00:49:37Z"
 		},
 		{
+			"checksumSHA1": "0Pry12nZ6UQBd1iXEtszySSfFpI=",
+			"path": "github.com/jinzhu/gorm/dialects/postgres",
+			"revision": "742154be9a26e849f02d296073c077e0a7c23828",
+			"revisionTime": "2018-10-07T00:49:37Z"
+		},
+		{
 			"checksumSHA1": "4eelJOSLZoDzLuaJvgilOBVNovU=",
 			"path": "github.com/jinzhu/inflection",
 			"revision": "04140366298a54a039076d798123ffa108fff46c",
 			"revisionTime": "2018-03-08T03:36:59Z"
+		},
+		{
+			"checksumSHA1": "66skRjpx6iDbz6OUSLwmBvPSDUs=",
+			"path": "github.com/json-iterator/go",
+			"revision": "ab8a2e0c74be9d3be70b3184d9acc634935ded82",
+			"revisionTime": "2018-07-01T07:16:28Z"
 		},
 		{
 			"checksumSHA1": "snkx1QYw5SX7ShHW8QlWFRc965E=",
@@ -85,14 +102,28 @@
 			"revisionTime": "2018-08-30T10:17:45Z"
 		},
 		{
+			"checksumSHA1": "ZTcgWKWHsrX0RXYVXn5Xeb8Q0go=",
+			"path": "github.com/modern-go/concurrent",
+			"revision": "bacd9c7ef1dd9b15be4a9909b8ac7a4e313eec94",
+			"revisionTime": "2018-03-06T01:26:44Z"
+		},
+		{
+			"checksumSHA1": "qvH48wzTIV3QKSDqI0dLFtVjaDI=",
+			"path": "github.com/modern-go/reflect2",
+			"revision": "94122c33edd36123c84d5368cfb2b69df93a0ec8",
+			"revisionTime": "2018-07-18T01:23:57Z"
+		},
+		{
+			"checksumSHA1": "LuFv4/jlrmFNnDb/5SCSEPAM9vU=",
+			"path": "github.com/pmezard/go-difflib/difflib",
+			"revision": "792786c7400a136282c1664665ae0a8db921c6c2",
+			"revisionTime": "2016-01-10T10:55:54Z"
+		},
+		{
 			"checksumSHA1": "IopMW+arBezL5bqOfrVU6UEfn28=",
 			"path": "github.com/thinkerou/favicon",
 			"revision": "94a442a49da6e2d44bdd5e0d2e2e185c43a19d93",
 			"revisionTime": "2017-07-10T14:05:20Z"
-		},
-		{
-			"path": "github.com/ugorji/go/codec",
-			"revision": ""
 		},
 		{
 			"path": "golang.org/x/crypto/acme",
@@ -119,11 +150,25 @@
 			"revision": ""
 		},
 		{
-			"path": "google.golang.org/grpc",
-			"revision": ""
+			"checksumSHA1": "4Im9wKzWtIB9dgTZv34B9YIpzak=",
+			"path": "golang.org/x/tools/go/ast/astutil",
+			"revision": "40a48ad93fbe707101afb2099b738471f70594ec",
+			"revisionTime": "2018-10-22T15:02:50Z"
 		},
 		{
-			"path": "gopkg.in/yaml.v2",
+			"checksumSHA1": "9t0JXT9GjzJ/iO8iEeF4vmXVWfs=",
+			"path": "golang.org/x/tools/go/gcexportdata",
+			"revision": "40a48ad93fbe707101afb2099b738471f70594ec",
+			"revisionTime": "2018-10-22T15:02:50Z"
+		},
+		{
+			"checksumSHA1": "j/pptvqymwNIb1NW6ZgTbOfxKtA=",
+			"path": "golang.org/x/tools/go/internal/gcimporter",
+			"revision": "40a48ad93fbe707101afb2099b738471f70594ec",
+			"revisionTime": "2018-10-22T15:02:50Z"
+		},
+		{
+			"path": "google.golang.org/grpc",
 			"revision": ""
 		}
 	],

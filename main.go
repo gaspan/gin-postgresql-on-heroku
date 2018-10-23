@@ -9,7 +9,7 @@ import (
 
 func main() {
 	// connecting postgres db
-	db, err := gorm.Open("mysql", "user:password@/dbname?charset=utf8&parseTime=True&loc=Local")
+	db, _ := gorm.Open("mysql", "user:password@/dbname?charset=utf8&parseTime=True&loc=Local")
 	defer db.Close()
 
 	router := gin.Default()
