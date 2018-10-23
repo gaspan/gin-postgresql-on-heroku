@@ -36,5 +36,5 @@ func main() {
 	api.PUT("employee/:id", employee.Update)
 	api.DELETE("employee/:id", employee.Delete)
 
-	router.Run(":8000")
+	router.Run()
 }
