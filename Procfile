@@ -1,1 +1,1 @@
-api: go-employee-api
+web: go-employee-api
