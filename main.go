@@ -1,7 +1,7 @@
 package main
 
 import (
-	"emp-api/handler"
+	"employee-api/handler"
 	"os"
 
 	"github.com/gin-gonic/gin"

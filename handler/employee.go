@@ -1,7 +1,7 @@
 package employee
 
 import (
-	"emp-api/model"
+	"employee-api/model"
 	"net/http"
 	"strconv"
 
