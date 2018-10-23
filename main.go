@@ -2,14 +2,25 @@ package main
 
 import (
 	"emp-api/handler"
+	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 )
 
+var db *gorm.DB
+var err error
+
 func main() {
 	// connecting postgres db
-	db, _ := gorm.Open("mysql", "user:password@/dbname?charset=utf8&parseTime=True&loc=Local")
+	db, err = gorm.Open(
+		"postgres",
+		"host="+os.Getenv("HOST")+" user="+os.Getenv("USER")+
+			" dbname="+os.Getenv("DBNAME")+" sslmode=disable password="+
+			os.Getenv("PASSWORD"))
+	if err != nil {
+		panic("failed to connect database")
+	}
 	defer db.Close()
 
 	router := gin.Default()
