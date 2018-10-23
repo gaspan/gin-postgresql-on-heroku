@@ -1,1 +1,1 @@
-web: employee-api
+web: go run main.go
