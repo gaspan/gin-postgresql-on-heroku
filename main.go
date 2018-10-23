@@ -2,6 +2,7 @@ package main
 
 import (
 	"employee-api/handler"
+	"fmt"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -18,7 +19,12 @@ func main() {
 			" dbname="+os.Getenv("DB_NAME")+" sslmode=disable password="+
 			os.Getenv("DB_PASS"))
 
+	fmt.Print("host=" + os.Getenv("DB_HOST") + " user=" + os.Getenv("DB_USER") +
+		" dbname=" + os.Getenv("DB_NAME") + " sslmode=disable password=" +
+		os.Getenv("DB_PASS"))
+
 	if err != nil {
+		fmt.Print(err)
 		panic("failed to connect database")
 	}
 
