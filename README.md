@@ -1,6 +1,6 @@
 ## Simple CRUD with gin-gonic
 
-Simple CRUD operation with gin gonic (HTTP web framework written in Go) with local slices
+CRUD operation with gin-gonic + postgresql deployed on Heroku
 
 - go run main.go
 - runs at port :8000
