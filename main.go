@@ -20,10 +20,6 @@ func main() {
 			" dbname="+os.Getenv("DB_NAME")+" sslmode=disable password="+
 			os.Getenv("DB_PASS"))
 
-	fmt.Println("host=" + os.Getenv("DB_HOST") + " user=" + os.Getenv("DB_USER") +
-		" dbname=" + os.Getenv("DB_NAME") + " sslmode=disable password=" +
-		os.Getenv("DB_PASS"))
-
 	if err != nil {
 		fmt.Println(err)
 		panic("failed to connect database")
@@ -40,5 +36,5 @@ func main() {
 	api.PUT("employee/:id", employee.Update)
 	api.DELETE("employee/:id", employee.Delete)
 
-	router.Run("localhost:8000")
+	router.Run(":8000")
 }
