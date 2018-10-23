@@ -12,12 +12,8 @@ var db *gorm.DB
 var err error
 
 func main() {
-	// connecting postgres db
-	db, err = gorm.Open(
-		"postgres",
-		"host="+os.Getenv("HOST")+" user="+os.Getenv("USER")+
-			" dbname="+os.Getenv("DBNAME")+" sslmode=disable password="+
-			os.Getenv("PASSWORD"))
+	db, err = gorm.Open("postgres", os.Getenv("DATABASE_URL"))
+
 	if err != nil {
 		panic("failed to connect database")
 	}
