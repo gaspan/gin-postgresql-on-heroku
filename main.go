@@ -16,16 +16,16 @@ var err error
 func main() {
 	db, err = gorm.Open(
 		"postgres",
-		"host="+os.Getenv("DB_HOST")+" user="+os.Getenv("DB_USER")+
+		"host="+os.Getenv("DB_HOST")+" port="+os.Getenv("DB_PORT")+" user="+os.Getenv("DB_USER")+
 			" dbname="+os.Getenv("DB_NAME")+" sslmode=disable password="+
 			os.Getenv("DB_PASS"))
 
-	fmt.Print("host=" + os.Getenv("DB_HOST") + " user=" + os.Getenv("DB_USER") +
+	fmt.Println("host=" + os.Getenv("DB_HOST") + " user=" + os.Getenv("DB_USER") +
 		" dbname=" + os.Getenv("DB_NAME") + " sslmode=disable password=" +
 		os.Getenv("DB_PASS"))
 
 	if err != nil {
-		fmt.Print(err)
+		fmt.Println(err)
 		panic("failed to connect database")
 	}
 
