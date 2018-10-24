@@ -2,7 +2,6 @@ package main
 
 import (
 	"employee-api/handler"
-	"fmt"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -21,7 +20,6 @@ func main() {
 			os.Getenv("DB_PASS"))
 
 	if err != nil {
-		fmt.Println(err)
 		panic("failed to connect database")
 	}
 
