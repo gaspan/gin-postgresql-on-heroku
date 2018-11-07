@@ -12,28 +12,27 @@ import (
 )
 
 type ErrorResponse struct {
-	Status  int
-	Message string
+	Status  int    `json:"status"`
+	Message string `json:"message"`
 }
 
 type Response struct {
-	Status  int
-	Message string
-	Data    Employee
+	Status  int      `json:"status"`
+	Message string   `json:"message"`
+	Data    Employee `json:"data"`
 }
 
 type ArrayResponse struct {
-	Status  int
-	Message string
-	Data    []Employee
+	Status  int        `json:"status"`
+	Message string     `json:"message"`
+	Data    []Employee `json:"data"`
 }
 
 // Employee struct provides basic employee information
 type Employee struct {
-	gorm.Model
-	FirstName string `gorm:"type:varchar(100)"`
-	LastName  string `gorm:"type:varchar(100)"`
-	Age       uint
+	FirstName string `gorm:"type:varchar(100)" json:"firstname"`
+	LastName  string `gorm:"type:varchar(100)" json:"lastname"`
+	Age       uint   `json:"age"`
 }
 
 var db *gorm.DB
