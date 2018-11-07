@@ -139,16 +139,16 @@ func CreateEmployee(c *gin.Context) {
 func UpdateEmployee(c *gin.Context) {
 	id := c.Param("id")
 	var emp Employee
+
+	err := db.Where("id = ?", id).First(&emp).Error
+
 	if e := c.BindJSON(&emp); e != nil {
 		resp := ErrorResponse{
 			Status:  http.StatusBadRequest,
 			Message: "Incorrect body",
 		}
 		c.JSON(http.StatusBadRequest, resp)
-		return
 	}
-
-	err := db.Where("id = ?", id).First(&emp).Error
 
 	if err != nil {
 		resp := ErrorResponse{
