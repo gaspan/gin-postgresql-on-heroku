@@ -2,6 +2,7 @@ package main
 
 import (
 	"employee-api/handler"
+	"log"
 	"os"
 
 	"github.com/gin-gonic/gin"
@@ -13,14 +14,15 @@ var db *gorm.DB
 var err error
 
 func main() {
+	log.Println("env : ", os.Getenv("DB_HOST"))
+
 	db, err = gorm.Open(
 		"postgres",
 		"host="+os.Getenv("DB_HOST")+" port="+os.Getenv("DB_PORT")+" user="+os.Getenv("DB_USER")+
-			" dbname="+os.Getenv("DB_NAME")+" sslmode=disable password="+
-			os.Getenv("DB_PASS"))
+			" dbname="+os.Getenv("DB_NAME")+" sslmode=disable password="+os.Getenv("DB_PASS"))
 
 	if err != nil {
-		panic("failed to connect database")
+		log.Println("err ", err)
 	}
 
 	defer db.Close()

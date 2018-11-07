@@ -25,9 +25,6 @@ func Add(c *gin.Context) {
 		return
 	}
 
-	employee.ID = uint(len(employees))
-	employees = append(employees, employee)
-
 	resp := model.Response{
 		Status:  http.StatusOK,
 		Message: "success",
