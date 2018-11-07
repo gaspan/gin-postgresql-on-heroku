@@ -37,13 +37,23 @@ func main() {
 	router := gin.Default()
 	api := router.Group("/api")
 
-	api.GET("employee", List)
+	api.GET("employee", GetEmployee)
+	api.GET("employee/:id", GetOneEmployee)
 	router.Run()
 }
 
 // List all employees
-func List(c *gin.Context) {
+func GetEmployee(c *gin.Context) {
 	var employee []Employee
 	employees := db.Find(&employee)
+
 	c.JSON(http.StatusOK, employees.Value)
+}
+
+func GetOneEmployee(c *gin.Context) {
+	id := c.Param("id")
+
+	var emp Employee
+	employee := db.Where("id = ?", id).First(&emp)
+	c.JSON(http.StatusOK, employee)
 }
