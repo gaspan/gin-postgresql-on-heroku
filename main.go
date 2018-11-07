@@ -11,6 +11,23 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
+type ErrorResponse struct {
+	Status  int
+	Message string
+}
+
+type Response struct {
+	Status  int
+	Message string
+	Data    Employee
+}
+
+type ArrayResponse struct {
+	Status  int
+	Message string
+	Data    []Employee
+}
+
 // Employee struct provides basic employee information
 type Employee struct {
 	gorm.Model
@@ -53,9 +70,18 @@ func GetEmployee(c *gin.Context) {
 
 	if err != nil {
 		fmt.Println(err)
-		c.JSON(http.StatusServiceUnavailable, nil)
+		resp := ErrorResponse{
+			Status:  http.StatusServiceUnavailable,
+			Message: "failed",
+		}
+		c.JSON(http.StatusServiceUnavailable, resp)
 	} else {
-		c.JSON(http.StatusOK, emps)
+		resp := ArrayResponse{
+			Status:  http.StatusOK,
+			Message: "success",
+			Data:    emps,
+		}
+		c.JSON(http.StatusOK, resp)
 	}
 }
 
@@ -66,9 +92,18 @@ func GetOneEmployee(c *gin.Context) {
 	err := db.Where("id = ?", id).First(&emp).Error
 
 	if err != nil {
-		c.JSON(http.StatusServiceUnavailable, nil)
+		resp := ErrorResponse{
+			Status:  http.StatusServiceUnavailable,
+			Message: "failed",
+		}
+		c.JSON(http.StatusServiceUnavailable, resp)
 	} else {
-		c.JSON(http.StatusOK, emp)
+		resp := Response{
+			Status:  http.StatusOK,
+			Message: "success",
+			Data:    emp,
+		}
+		c.JSON(http.StatusOK, resp)
 	}
 }
 
@@ -77,24 +112,58 @@ func CreateEmployee(c *gin.Context) {
 	err := c.BindJSON(&emp)
 
 	if err != nil {
-		c.JSON(http.StatusBadRequest, nil)
+		resp := ErrorResponse{
+			Status:  http.StatusBadRequest,
+			Message: "Incorrect body",
+		}
+		c.JSON(http.StatusBadRequest, resp)
 	} else {
-		db.Create(&emp)
-		c.JSON(http.StatusOK, emp)
+		err := db.Create(&emp).Error
+		if err != nil {
+			resp := ErrorResponse{
+				Status:  http.StatusServiceUnavailable,
+				Message: "failed",
+			}
+			c.JSON(http.StatusServiceUnavailable, resp)
+		} else {
+			resp := Response{
+				Status:  http.StatusOK,
+				Message: "success",
+				Data:    emp,
+			}
+			c.JSON(http.StatusOK, resp)
+		}
 	}
 }
 
 func UpdateEmployee(c *gin.Context) {
 	id := c.Param("id")
 	var emp Employee
+	if e := c.BindJSON(&emp); e != nil {
+		resp := ErrorResponse{
+			Status:  http.StatusBadRequest,
+			Message: "Incorrect body",
+		}
+		c.JSON(http.StatusBadRequest, resp)
+		return
+	}
 
 	err := db.Where("id = ?", id).First(&emp).Error
+
 	if err != nil {
-		c.JSON(http.StatusBadRequest, nil)
+		resp := ErrorResponse{
+			Status:  http.StatusBadRequest,
+			Message: "failed",
+		}
+		c.JSON(http.StatusBadRequest, resp)
 	} else {
-		c.BindJSON(&emp)
 		db.Save(&emp)
-		c.JSON(http.StatusOK, emp)
+		resp := Response{
+			Status:  http.StatusOK,
+			Message: "success",
+			Data:    emp,
+		}
+		c.JSON(http.StatusOK, resp)
 	}
 }
 
@@ -103,10 +172,16 @@ func DeleteEmployee(c *gin.Context) {
 
 	var emp Employee
 	err := db.Where("id = ?", id).First(&emp).Error
+
 	if err != nil {
 		c.JSON(http.StatusBadRequest, nil)
 	} else {
 		db.Delete(&emp)
-		c.JSON(http.StatusOK, "success")
+		resp := Response{
+			Status:  http.StatusOK,
+			Message: "success",
+			Data:    emp,
+		}
+		c.JSON(http.StatusOK, resp)
 	}
 }
