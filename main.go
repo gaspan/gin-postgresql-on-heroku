@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -32,28 +33,37 @@ func main() {
 
 	defer db.Close()
 	db.AutoMigrate(&Employee{})
-	db.Create(&Employee{FirstName: "wasuwat", LastName: "lim", Age: 22})
 
 	router := gin.Default()
 	api := router.Group("/api")
 
 	api.GET("employee", GetEmployee)
 	api.GET("employee/:id", GetOneEmployee)
+
 	router.Run()
 }
 
-// List all employees
 func GetEmployee(c *gin.Context) {
-	var employee []Employee
-	employees := db.Find(&employee)
+	var employees []Employee
+	err := db.Find(&employees).Error
 
-	c.JSON(http.StatusOK, employees.Value)
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(http.StatusServiceUnavailable, nil)
+	} else {
+		c.JSON(http.StatusOK, employees)
+	}
 }
 
 func GetOneEmployee(c *gin.Context) {
 	id := c.Param("id")
 
 	var emp Employee
-	employee := db.Where("id = ?", id).First(&emp)
-	c.JSON(http.StatusOK, employee)
+	err := db.Where("id = ?", id).First(&emp).Error
+
+	if err != nil {
+		c.JSON(http.StatusServiceUnavailable, nil)
+	} else {
+		c.JSON(http.StatusOK, emp)
+	}
 }
