@@ -4,6 +4,7 @@ import (
 	"employee-api/handler"
 	"employee-api/model"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 
@@ -22,7 +23,7 @@ func main() {
 			" dbname="+os.Getenv("DB_NAME")+" sslmode=disable password="+os.Getenv("DB_PASS"))
 
 	if err != nil {
-		panic(err)
+		log.Println(err)
 	}
 
 	defer db.Close()
