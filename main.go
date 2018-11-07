@@ -42,7 +42,7 @@ func main() {
 	api.GET("employee/:id", GetOneEmployee)
 	api.POST("employee", CreateEmployee)
 	api.PUT("employee/:id", UpdateEmployee)
-	api.DELETE("employee", DeleteEmployee)
+	api.DELETE("employee/:id", DeleteEmployee)
 
 	router.Run()
 }
