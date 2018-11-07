@@ -1,9 +1,6 @@
 package main
 
 import (
-	"employee-api/handler"
-	"employee-api/model"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,6 +9,13 @@ import (
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
+
+type Employee struct {
+	gorm.Model
+	FirstName string `gorm:"type:varchar(100)"`
+	LastName  string `gorm:"type:varchar(100)"`
+	Age       uint
+}
 
 var db *gorm.DB
 var err error
@@ -23,29 +27,23 @@ func main() {
 			" dbname="+os.Getenv("DB_NAME")+" sslmode=disable password="+os.Getenv("DB_PASS"))
 
 	if err != nil {
-		log.Println(err)
+		log.Println("err", err)
 	}
 
 	defer db.Close()
-
-	db.AutoMigrate(&model.Employee{})
+	db.AutoMigrate(&Employee{})
+	db.Create(&Employee{FirstName: "wasuwat", LastName: "lim", Age: 22})
 
 	router := gin.Default()
 	api := router.Group("/api")
 
-	api.GET("employee", ListEmployees)
-	api.POST("employee", employee.Add)
-	api.PUT("employee/:id", employee.Update)
-	api.DELETE("employee/:id", employee.Delete)
-
-	router.Run(":5000")
+	api.GET("employee", List)
+	router.Run()
 }
 
-func ListEmployees(c *gin.Context) {
-	var employee []model.Employee
-	if err := db.Find(&employee).Error; err != nil {
-		fmt.Println(err)
-	} else {
-		c.JSON(http.StatusOK, employee)
-	}
+// List all employees
+func List(c *gin.Context) {
+	var employee []Employee
+	employees := db.Find(&employee)
+	c.JSON(http.StatusOK, employees.Value)
 }
