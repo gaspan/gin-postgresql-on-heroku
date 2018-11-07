@@ -30,6 +30,7 @@ type ArrayResponse struct {
 
 // Employee struct provides basic employee information
 type Employee struct {
+	gorm.Model
 	FirstName string `gorm:"type:varchar(100)" json:"firstname"`
 	LastName  string `gorm:"type:varchar(100)" json:"lastname"`
 	Age       uint   `json:"age"`
