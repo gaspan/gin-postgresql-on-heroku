@@ -11,6 +11,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
+// Employee struct provides basic employee information
 type Employee struct {
 	gorm.Model
 	FirstName string `gorm:"type:varchar(100)"`
@@ -41,6 +42,7 @@ func main() {
 	api.GET("employee/:id", GetOneEmployee)
 	api.POST("employee", CreateEmployee)
 	api.PUT("employee/:id", UpdateEmployee)
+	api.DELETE("employee", DeleteEmployee)
 
 	router.Run()
 }
@@ -93,5 +95,18 @@ func UpdateEmployee(c *gin.Context) {
 		c.BindJSON(&emp)
 		db.Save(&emp)
 		c.JSON(http.StatusOK, emp)
+	}
+}
+
+func DeleteEmployee(c *gin.Context) {
+	id := c.Param("id")
+
+	var emp Employee
+	err := db.Where("id = ?", id).First(&emp).Error
+	if err != nil {
+		c.JSON(http.StatusBadRequest, nil)
+	} else {
+		db.Delete(&emp)
+		c.JSON(http.StatusOK, "success")
 	}
 }
